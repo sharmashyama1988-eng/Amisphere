@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amisphere Search</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Init dark mode before rendering to avoid flash
+        const savedTheme = localStorage.getItem('amisphere_theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCasCfhLtstfPSyorRcm6cbj2xzhi87pRQ",
+            authDomain: "gen-lang-client-0506417299.firebaseapp.com",
+            projectId: "gen-lang-client-0506417299",
+            storageBucket: "gen-lang-client-0506417299.firebasestorage.app",
+            messagingSenderId: "214649300510",
+            appId: "1:214649300510:web:6e1cd5832245d7d09bb00f",
+            measurementId: "G-JDKJ0X6G56"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+</head>
+
+<body>
+    <header class="results-header-container">
+        <div class="results-header">
+            <a href="index.html" class="results-logo">
+                <span>A</span><span>m</span><span>i</span><span>s</span><span>p</span><span>h</span><span>e</span><span>r</span><span>e</span>
+            </a>
+            <form action="results.html" method="GET" style="flex: 1;">
+                <div class="search-box header-search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon" style="color: #4285f4; margin-right: 15px;"></i>
+                    <input type="text" name="q" id="search-input" class="search-input" required autocomplete="off">
+                </div>
+            </form>
+            <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+        <div class="search-nav">
+            <a href="#" class="nav-tab active"><i class="fa-solid fa-magnifying-glass"></i> All</a>
+            <a href="#" class="nav-tab"><i class="fa-regular fa-image"></i> Images</a>
+            <a href="#" class="nav-tab"><i class="fa-regular fa-newspaper"></i> News</a>
+            <a href="#" class="nav-tab"><i class="fa-solid fa-video"></i> Videos</a>
+            <a href="#" class="nav-tab"><i class="fa-solid fa-ellipsis-vertical"></i> More</a>
+        </div>
+    </header>
+
+    <div class="results-container">
+        <!-- Did you mean / Spellcheck -->
+        <div id="did-you-mean" class="did-you-mean" style="display: none;"></div>
+
+        <!-- AI Summary View (Mimic Google AI Overview) -->
+        <div class="ai-overview" id="ai-overview" style="display: none;">
+            <div class="ai-header">
+                <i class="fa-solid fa-sparkles ai-icon"></i>
+                <span class="ai-title">Amisphere AI Overview</span>
+            </div>
+            <div class="ai-content" id="ai-content">
+                Amisphere AI is currently analyzing this topic...
+            </div>
+        </div>
+
+        <!-- Wikipedia Results -->
+        <div id="search-results">
+            <!-- Results populated by JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination" style="display: none;">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

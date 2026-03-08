@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amisphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Load FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="home-container">
+        <!-- Logo mimicking Google colors -->
+        <h1 class="logo">
+            <span>A</span><span>m</span><span>i</span><span>s</span><span>p</span><span>h</span><span>e</span><span>r</span><span>e</span>
+        </h1>
+        
+        <form action="/search" method="GET" class="search-form">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" name="q" class="search-input" autofocus required autocomplete="off" title="Search">
+                <!-- Use microphone icon just for aesthetic -->
+                <i class="fa-solid fa-microphone search-icon" style="color: #4285f4; cursor: pointer; margin-right: 0;"></i>
+            </div>
+            
+            <div class="buttons" style="text-align: center;">
+                <input type="submit" class="btn" value="Amisphere Search">
+                <input type="button" class="btn" value="I'm Feeling Lucky" onclick="window.location.href='/search?q=Special Result'">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

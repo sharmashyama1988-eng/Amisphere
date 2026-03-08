@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ query }} - Amisphere Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .home-container {
+            display: none;
+        }
+
+        /* Hide index style if somehow matched */
+    </style>
+</head>
+
+<body>
+    <header class="results-header">
+        <a href="/" class="results-logo">
+            <span>A</span><span>m</span><span>i</span><span>s</span><span>p</span><span>h</span><span>e</span><span>r</span><span>e</span>
+        </a>
+        <form action="/search" method="GET" style="flex: 1;">
+            <div class="search-box header-search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon" style="color: #4285f4; margin-right: 15px;"></i>
+                <input type="text" name="q" value="{{ query }}" class="search-input" required autocomplete="off">
+            </div>
+        </form>
+    </header>
+
+    <div class="results-container">
+        <!-- AI Summary View (Mimic Google AI Overview) -->
+        {% if ai_summary %}
+        <div class="ai-overview">
+            <div class="ai-header">
+                <i class="fa-solid fa-sparkles ai-icon"></i>
+                <span class="ai-title">Amisphere AI Overview</span>
+            </div>
+            <div class="ai-content">
+                <!-- Using built-in safe filter for basic HTML formatting output -->
+                {{ ai_summary | safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Wikipedia Results -->
+        {% if results %}
+        {% for item in results %}
+        <div class="result-item">
+            <a href="{{ item.url }}" class="result-url">{{ item.url }}</a>
+            <a href="{{ item.url }}" class="result-title">{{ item.title }}</a>
+            <div class="result-snippet">{{ item.snippet | safe }}</div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Your search - <strong>{{ query }}</strong> - did not match any documents.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
